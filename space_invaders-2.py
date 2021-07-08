@@ -13,7 +13,7 @@ pygame.init()
 WIDTH, HEIGHT = 800, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 fire = 0
-Score = 0
+
 
 # Title
 pygame.display.set_caption("Space Invaders")
@@ -168,15 +168,23 @@ class Ship:
 
 
 class Player(Ship):
-    def __init__(self, x, y, health =100):
+    def __init__(self, x, y, health =100, score = 0):
         super().__init__(x, y, health)
         self.ship_img = PLAYER_SPACE_SHIP
         self.laser_img = PLAYER_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
         self.remain_health = health
+        self.score  = score
+        self.high_score = score
         
     def move_lasers(self, velocity, objs):
+        if(not os.path.exists("high_score.txt")):
+            with open("high_score.txt", "w") as f:
+                f.write("0")
+        with open("high_score.txt", "r") as f:
+            self.high_score = f.read()
+
         self.cooldown()
         for laser in self.lasers:
             laser.move(velocity)
@@ -185,8 +193,11 @@ class Player(Ship):
             else:
                 for obj in objs:
                     if laser.collision(obj):
-                        global Score
-                        Score += 1
+                        self.score += 1
+                        if self.score > int(self.high_score):
+                            self.high_score = self.score  
+                            with open("high_score.txt", "w") as f:
+                                f.write(str(self.high_score))
                         explosion_sound = mixer.Sound('sounds/invaderkilled.wav')
                         explosion_sound.play()
                         objs.remove(obj)
@@ -243,17 +254,18 @@ def collide(obj1, obj2):
 def gameloop():
     run = True
     FPS = 60
-    global Score
     level = 0
     lives = 5
     lost = False
     lost_count = 0
     player_velocity = 5
     laser_velocity = 7
-    
     enemies = []
     wave_length = 5
     enemy_velocity = 1    
+    
+        
+    
     
     player = Player(300, 500)
     
@@ -266,9 +278,10 @@ def gameloop():
     def redraw():
         SCREEN.blit(inGameImage, (0,0))
         # text 
-        text_screen(f"Lives : {lives}",(255, 255, 255), 10, 10, 30)
-        text_screen(f"Score : {Score}",(255, 255, 255), 10, 40, 30)
+        text_screen(f"Score : {player.score}",(255, 255, 255), 10, 10, 30)
+        text_screen(f"High Score : {player.high_score}",(255, 255, 255), 10, 40, 30)
         text_screen(f"Level : {level}",(255, 255, 255), (WIDTH - 110), 10, 30)
+        text_screen(f"Lives : {lives}",(255, 255, 255), (WIDTH - 110), 40, 30)
 
 
         for enemy in enemies:
@@ -279,7 +292,8 @@ def gameloop():
         if lost:
             text_screen("Game Over", (255, 255, 255), 280, 280, 60)
             text_screen("Press Enter To Play Again", (255, 255, 255), 220, 330, 40)
-            text_screen(f"Your Score : {Score}", (255, 255, 255), 300, 380, 40)
+            text_screen(f"Your Score : {player.score}", (255, 255, 255), 300, 380, 40)
+            
         
             for event in pygame .event.get():
                 if event.type == pygame.QUIT:
