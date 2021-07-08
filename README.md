@@ -1,6 +1,6 @@
 # SPACE-INVADERS-2
 
-This is a Shooting Game Made using Pygame Module. Hope You will like the game.
+This is Second version of my Space-Invaders Game Made using Pygame Module. Hope You will like the game.
 You can use this code to write your own game 
 
 ## To play This game:
@@ -17,6 +17,15 @@ You can use this code to write your own game
 * Then type -> "python final.py"
 * This will run the game , enjoy😄!!!  
 
+### Commands To play the game
+* Use left, right, up, down arow keys to move 
+* Press space to shoot
+
+
+| Cheats 😄
+
+* Press "f" to full the health
+* Press "q" to increase lives
 
 ### Don't delete any file it may crash the game
 
