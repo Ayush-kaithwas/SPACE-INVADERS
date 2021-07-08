@@ -13,7 +13,7 @@ You can use this code to write your own game
         pip3 install pygame
 
 * Extract the Zip file in C-drive
-* Open cmd and type "cd" then give the location of the "final.py" file inside folder("SPACE-INVADERS-2")
+* Open cmd and type "cd" then give the path of the "final.py" file inside folder("SPACE-INVADERS-2")
 * Then type -> "python final.py"
 * This will run the game , enjoy😄!!!  
 
