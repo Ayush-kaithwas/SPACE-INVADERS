@@ -127,6 +127,7 @@ class Ship:
                 laser = Laser(self.x +16, self.y, self.laser_img)
                 self.lasers.append(laser)
                 bullet_sound = mixer.Sound('sounds/shoot.wav')
+                bullet_sound.set_volume(0.1)
                 bullet_sound.play()
                 self.cool_down_counter = 1
             elif fire == 2:
@@ -135,6 +136,7 @@ class Ship:
                 self.lasers.append(laser1)
                 self.lasers.append(laser2)
                 bullet_sound = mixer.Sound('sounds/shoot.wav')
+                bullet_sound.set_volume(0.1)
                 bullet_sound.play()
                 self.cool_down_counter = 1
             elif fire == 3:
@@ -145,6 +147,7 @@ class Ship:
                 self.lasers.append(laser2)
                 self.lasers.append(laser3)
                 bullet_sound = mixer.Sound('sounds/shoot.wav')
+                bullet_sound.set_volume(0.1)
                 bullet_sound.play()
                 self.cool_down_counter = 1
             elif fire == 4:
@@ -157,12 +160,14 @@ class Ship:
                 self.lasers.append(laser3)
                 self.lasers.append(laser4)
                 bullet_sound = mixer.Sound('sounds/shoot.wav')
+                bullet_sound.set_volume(0.1)
                 bullet_sound.play()
                 self.cool_down_counter = 1
             else:
                 laser = Laser(self.x + 16 , self.y, self.laser_img)
                 self.lasers.append(laser)
                 bullet_sound = mixer.Sound('sounds/shoot.wav')
+                bullet_sound.set_volume(0.1)
                 bullet_sound.play()
                 self.cool_down_counter = 1
 
@@ -199,6 +204,7 @@ class Player(Ship):
                             with open("high_score.txt", "w") as f:
                                 f.write(str(self.high_score))
                         explosion_sound = mixer.Sound('sounds/invaderkilled.wav')
+                        explosion_sound.set_volume(0.1)
                         explosion_sound.play()
                         objs.remove(obj)
                         if laser in self.lasers:
@@ -273,6 +279,7 @@ def gameloop():
     
     # Background Sound
     mixer.music.load('sounds/bg-1.mp3')
+    mixer.music.set_volume(0.1)
     mixer.music.play(-1)
     
     def redraw():
@@ -364,6 +371,7 @@ def gameloop():
             if collide(enemy, player):
                 player.health -= 10
                 enemy_explosion_sound = mixer.Sound('sounds/explosion.wav')
+                enemy_explosion_sound.set_volume(0.1)
                 enemy_explosion_sound.play()
                 enemies.remove(enemy)
               
@@ -394,6 +402,7 @@ def welcome():
         
     
     mixer.music.load('sounds/intro.mpeg')
+    mixer.music.set_volume(0.2)
     mixer.music.play()
     while not exit_game:
         for event in pygame.event.get():
