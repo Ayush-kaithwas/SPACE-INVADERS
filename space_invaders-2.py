@@ -264,7 +264,7 @@ def gameloop():
     lives = 5
     lost = False
     lost_count = 0
-    player_velocity = 5
+    player_velocity = 8
     laser_velocity = 7
     enemies = []
     wave_length = 5
@@ -329,6 +329,7 @@ def gameloop():
             level += 1
             wave_length += 5
             enemy_velocity += 1
+            laser_velocity += 1
             for i in range(wave_length):
                 enemy = Enemy(random.randrange(50, WIDTH-100), random.randrange(-1000*level, -100), random.choice(["red", "blue", "green", "yellow", "alien1", "alien2", "alien3"]))
                 enemies.append(enemy)
@@ -342,7 +343,12 @@ def gameloop():
 
                 if event.key == pygame.K_f:
                     player.remain_health = player.health = 100
-
+                
+                if event.key == pygame.K_0:
+                    mixer.music.pause()
+               
+                if event.key == pygame.K_r:
+                    mixer.music.play()
 
         keys = pygame.key.get_pressed()
                         

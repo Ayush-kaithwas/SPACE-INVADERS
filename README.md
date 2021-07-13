@@ -26,6 +26,8 @@ You can use this code to write your own game
 
 * Press "f" to full the health
 * Press "q" to increase lives
+* Press "0" to Pause the music
+* Press "r" to Resume the music
 
 ### Don't delete any file it may crash the game
 
