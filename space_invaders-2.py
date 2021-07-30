@@ -22,7 +22,6 @@ pygame.display.set_icon(icon)
 
 # Load images
 INVADER1_SPACE_SHIP = pygame.image.load('images/red_enemy.png')
-INVADER2_SPACE_SHIP = pygame.image.load('images/green_enemy.png')
 INVADER3_SPACE_SHIP = pygame.image.load('images/blue_enemy.png')
 INVADER4_SPACE_SHIP = pygame.image.load('images/yellow_enemy.png')
 ALIEN1 = pygame.image.load('images/alien-1.png')
@@ -226,7 +225,6 @@ class Player(Ship):
 class Enemy(Ship):
     COLOR_MAP = {
             "red" : (INVADER1_SPACE_SHIP, RED_LASER),
-            "green" :(INVADER2_SPACE_SHIP, GREEN_LASER),
             "blue" : (INVADER3_SPACE_SHIP, BLUE_LASER),
             "yellow" : (INVADER4_SPACE_SHIP, YELLOW_LASER),
             "alien1" : (ALIEN1, GREEN_LASER),
@@ -331,7 +329,7 @@ def gameloop():
             enemy_velocity += 1
             laser_velocity += 1
             for i in range(wave_length):
-                enemy = Enemy(random.randrange(50, WIDTH-100), random.randrange(-1000*level, -100), random.choice(["red", "blue", "green", "yellow", "alien1", "alien2", "alien3"]))
+                enemy = Enemy(random.randrange(50, WIDTH-100), random.randrange(-1000*level, -100), random.choice(["red", "blue","yellow", "alien1", "alien2", "alien3"]))
                 enemies.append(enemy)
         
         for event in pygame.event.get():
